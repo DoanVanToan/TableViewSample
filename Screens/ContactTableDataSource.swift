@@ -9,17 +9,11 @@
 import Foundation
 import UIKit
 
-class ContactTableDataSource: NSObject, UITableViewDataSource{
+class ContactTableDataSource: ContractTableHelper, UITableViewDataSource{
     struct Const{
         static let CELL_ID = "ContactTableViewCell"
     }
-    
-    private var contacts: [Contact]
-    
-    init(contacts: [Contact]) {
-        self.contacts = contacts
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.contacts.count
     }
