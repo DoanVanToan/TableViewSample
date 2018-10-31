@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDelegate{
+class MainViewController: UIViewController{
     struct Const {
        static let HOME_TITLE = "Contacts"
     }
@@ -17,6 +17,7 @@ class MainViewController: UIViewController, UITableViewDelegate{
     @IBOutlet private weak var navigationBar: UINavigationBar!
     
     private var dataSource: ContactTableDataSource!
+    private var delegate: UITableViewDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,8 @@ class MainViewController: UIViewController, UITableViewDelegate{
     
     private func showContacts(contacts: [Contact]) {
         dataSource = ContactTableDataSource(contacts: contacts)
-        tableViewContact.delegate = self
+        delegate = ContactTableDelegate(contacts: contacts, controller: self)
+        tableViewContact.delegate = delegate
         tableViewContact.dataSource = dataSource
     }
     
@@ -49,5 +51,6 @@ class MainViewController: UIViewController, UITableViewDelegate{
         }
         return result
     }
+ 
 }
 
