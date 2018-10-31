@@ -2,16 +2,16 @@
 //  ContactTableViewCell.swift
 //  TableViewSample
 //
-//  Created by doan.van.toan on 10/23/18.
+//  Created by doan.van.toan on 10/24/18.
 //  Copyright © 2018 doan.van.toan. All rights reserved.
 //
 
 import UIKit
 
 class ContactTableViewCell: UITableViewCell {
-    private @IBOutlet weak var imageAvatar: UIImageView!
-    private @IBOutlet weak var lablePhone: UILabel!
-    private @IBOutlet weak var lableName: UILabel!
+
+    @IBOutlet private weak var labelPhone: UILabel!
+    @IBOutlet private weak var labelName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,8 +24,9 @@ class ContactTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func bindView(contact: Contact){
-        self.lableName.text = contact.name
-        self.lablePhone.text = contact.phone
+    func bindView(contact: Contact) {
+        labelName.text = contact.name
+        labelPhone.text = contact.phone
     }
+    
 }

@@ -9,8 +9,14 @@
 import UIKit
 
 class MainViewController: UIViewController, UITableViewDelegate{
-
-    @IBOutlet weak var tableViewContact: UITableView!
+    struct Const {
+       static let HOME_TITLE = "Contacts"
+    }
+    
+    @IBOutlet private weak var tableViewContact: UITableView!
+    @IBOutlet private weak var navigationBar: UINavigationBar!
+    
+    private var dataSource: ContactTableDataSource!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +24,7 @@ class MainViewController: UIViewController, UITableViewDelegate{
         initViews()
         showContacts(contacts: getContacts())
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -27,11 +33,13 @@ class MainViewController: UIViewController, UITableViewDelegate{
     private func initViews(){
         let nib = UINib.init(nibName: ContactTableDataSource.Const.CELL_ID, bundle: nil)
         tableViewContact.register(nib, forCellReuseIdentifier: ContactTableDataSource.Const.CELL_ID)
+        self.navigationBar.topItem?.title = Const.HOME_TITLE
     }
     
-    private func showContacts(contacts: [Contact]){
+    private func showContacts(contacts: [Contact]) {
+        dataSource = ContactTableDataSource(contacts: contacts)
         tableViewContact.delegate = self
-        tableViewContact.dataSource = ContactTableDataSource(contacts: contacts)
+        tableViewContact.dataSource = dataSource
     }
     
     private func getContacts() -> [Contact] {
